@@ -192,3 +192,24 @@
   window.addEventListener("load", initSwiper);
 
 })();
+
+
+// Script untuk menambahkan class active pada menu yang dipilih
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.navmenu a');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Hapus class active dari semua link
+            navLinks.forEach(nav => nav.classList.remove('active'));
+
+            // Tambahkan class active ke link yang diklik
+            this.classList.add('active');
+        });
+
+        // Tambahkan active class jika URL sesuai
+        if(link.href === window.location.href) {
+            link.classList.add('active');
+        }
+    });
+});
