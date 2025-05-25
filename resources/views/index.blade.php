@@ -1,5 +1,7 @@
   @extends('layouts.main')
   @section('container')
+  <!-- /Hero Section -->
+
       <section id="hero" class="hero section dark-background">
 
           <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
@@ -49,7 +51,7 @@
 
           </div>
 
-      </section><!-- /Hero Section -->
+      </section>
 
       <!-- About Section -->
       <section id="about" class="about section">

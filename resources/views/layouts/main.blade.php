@@ -35,7 +35,19 @@
                 <h1 class="sitename">SMA 1 Kadupandak</h1><span>.</span>
             </a>
 
-            @include('layouts.partials.navbar')
+            <!-- Page Title -->
+            <div class="page-title accent-background">
+                <div class="container d-lg-flex justify-content-between align-items-center">
+                    <h1 class="mb-2 mb-lg-0">About</h1>
+                    <nav class="breadcrumbs">
+                        <ol>
+                            <li><a href="/">Home</a></li>
+                            <li class="current">About</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!-- End Page Title -->
 
             <div class="header-social-links">
                 <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
@@ -47,8 +59,8 @@
         </div>
     </header>
     <!-- End Header -->
-        {{-- Page Title --}}
-        @include('layouts.partials.page-title')
+    {{-- Page Title --}}
+    @include('layouts.partials.page-title')
 
     <main class="main">
         <!-- Hero Section -->

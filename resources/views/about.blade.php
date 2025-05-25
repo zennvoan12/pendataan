@@ -45,5 +45,6 @@
 
         </div>
 
-    </section><!-- /About Section -->
+    </section>
+    <!-- /About Section -->
 @endsection
