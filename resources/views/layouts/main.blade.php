@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -21,13 +21,7 @@
 
     <!-- Vendor CSS Files -->
     @include('layouts.partials.vendor.css')
-    <!-- =======================================================
-  * Template Name: Company
-  * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body class="index-page">
@@ -52,6 +46,9 @@
 
         </div>
     </header>
+    <!-- End Header -->
+        {{-- Page Title --}}
+        @include('layouts.partials.page-title')
 
     <main class="main">
         <!-- Hero Section -->
@@ -60,12 +57,13 @@
 
     </main>
 
+    {{-- Footer --}}
     @include('layouts.partials.footer')
 
 
-    @include('layouts.partials.vendor.js')
 
     <!-- Main JS File -->
+    @include('layouts.partials.vendor.js')
 
 </body>
 
