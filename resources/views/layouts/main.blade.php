@@ -36,17 +36,7 @@
             </a>
 
             <!-- Page Title -->
-            <div class="page-title accent-background">
-                <div class="container d-lg-flex justify-content-between align-items-center">
-                    <h1 class="mb-2 mb-lg-0">About</h1>
-                    <nav class="breadcrumbs">
-                        <ol>
-                            <li><a href="/">Home</a></li>
-                            <li class="current">About</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+           @include('layouts.partials.navbar')
             <!-- End Page Title -->
 
             <div class="header-social-links">
@@ -60,7 +50,6 @@
     </header>
     <!-- End Header -->
     {{-- Page Title --}}
-    @include('layouts.partials.page-title')
 
     <main class="main">
         <!-- Hero Section -->
