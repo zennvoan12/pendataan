@@ -11,10 +11,10 @@
             @foreach ($posts as $post)
                 <article class="mb-5">
                     <h2>
-                        <a href="/blog/{{ $post['slug'] }}"> {{ $post['title'] }}</a>
+                        <a href="/blog/{{ $post->id }}"> {{ $post->title }}</a>
                     </h2>
-                    <h5>By :{{ $post['author'] }}</h5>
-                    <p>{{ $post['content'] }}</p>
+                    <h5>By :{{ $post->author }}</h5>
+                    <p>{{ $post->content }}</p>
                 </article>
             @endforeach
 
@@ -43,3 +43,13 @@
 
     </main>
 @endsection
+
+{{-- \App\Models\Blog::create([
+    'title' => 'Judul 4',
+    'slug' => 'judul-5',
+    'author' => 'Elisabeth Yunia',
+    'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. A suscipit delectus sunt aliquam placeat numquam minus expedita, alias sapiente laborum. Commodi at suscipit sunt dolorum cupiditate perspiciatis distinctio impedit ad natus totam accusantium consequatur earum officiis similique quam, laborum odit sit dignissimos velit eaque quisquam reprehenderit! Voluptatem, quis. Nemo ea magnam quae natus quos placeat recusandae quo quaerat corrupti. Animi velit recusandae consequatur nam maiores voluptatibus quis officia quisquam adipisci!',
+    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure ullam totam sed distinctio, facere exercitationem alias. Dolore eligendi molestiae dolor, et quidem repudiandae neque odio ratione, sequi laboriosam nulla sed eos ipsum accusamus officia consectetur ipsa perferendis dolores quisquam cum? Soluta quod autem totam perferendis natus error, eveniet eligendi, alias iste id veniam, amet maiores corrupti quam. Earum placeat error quos qui, aspernatur odio maxime cupiditate doloribus amet eius esse? Tenetur blanditiis quod voluptates saepe voluptatibus et quos! Delectus error alias molestiae quod minima aperiam, quia animi labore cumque velit adipisci ratione non dolorum ipsa quam libero temporibus unde eum.',
+]); --}}
+
+
