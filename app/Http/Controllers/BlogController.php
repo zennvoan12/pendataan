@@ -15,15 +15,12 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show(Blog $blog)
     {
-        $post = Blog::find($slug);
-        if (!$post) {
-            abort(404);
-        }
+
         return view('blog-details', [
-            'title' => $post['title'],
-            'post' => $post
+            'title' => $blog['title'],
+            'post' => $blog
         ]);
     }
 }

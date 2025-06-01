@@ -11,4 +11,8 @@ class Blog extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
