@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
 use App\Models\User;
 
 Route::get("/", function () {
@@ -22,22 +23,10 @@ Route::get("/about", [AboutController::class, 'index'])->name('about.index');
 Route::resource('/blog', BlogController::class)->parameters(['blog' => 'blog:slug']);
 
 
-Route::get('/categories', function () {
-    return view('categories', [
-        'title' => 'Blog Categories',
-        'categories' => Category::all()
-    ]);
-});
+Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
 
 
-Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
-        'posts' => $category->posts,
-        'category' => $category->name,
-        'categories' => Category::all()
-    ]);
-});
+
 
 
 Route::get('/authors/{author:username}', function (User $author) {
