@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
+use App\Models\User;
 
 Route::get("/", function () {
     return view(
@@ -35,5 +36,14 @@ Route::get('/categories/{category:slug}', function (Category $category) {
         'posts' => $category->posts,
         'category' => $category->name,
         'categories' => Category::all()
+    ]);
+});
+
+
+Route::get('/authors/{author:username}', function (User $author) {
+    return view('blog', [
+        'title' => "Posts by {$author->name}",
+        'posts' => $author->blogs,
+        // 'categories' => Category::all()
     ]);
 });

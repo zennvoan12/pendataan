@@ -13,7 +13,7 @@
                     <h2>
                         <a href="/blog/{{ $post->slug }}"> {{ $post->title }}</a>
                     </h2>
-                    <h5>By : {{ $post->user->name }} </h5>
+                    <h5>By : <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a> </h5>
                     <p>{{ $post->content }}</p>
                 </article>
             @endforeach

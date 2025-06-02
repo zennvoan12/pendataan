@@ -22,7 +22,7 @@
                             <div class="meta-top">
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                            href="blog-details.html">{{ $post->user->name }}</a></li>
+                                            href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
                                             href="blog-details.html"><time datetime="2020-01-01">Jan 1, 2022</time></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
@@ -51,7 +51,8 @@
                             <div class="meta-bottom">
                                 <i class="bi bi-folder"></i>
                                 <ul class="cats">
-                                    <li><a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></li>
+                                    <li><a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                                    </li>
                                 </ul>
 
                                 <i class="bi bi-tags"></i>
