@@ -12,7 +12,7 @@ class BlogController extends Controller
         return view('blog', [
             'title' => ' All Blogs',
             // 'posts' => Blog::all()
-            'posts' => Blog::latest()->get()
+            'posts' => Blog::with(['author','category'])->latest()->get()
         ]);
     }
 

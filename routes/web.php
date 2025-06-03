@@ -32,7 +32,7 @@ Route::resource('/categories', CategoryController::class)->parameters(['categori
 Route::get('/authors/{author:username}', function (User $author) {
     return view('blog', [
         'title' => "Posts by {$author->name}",
-        'posts' => $author->blogs,
+        'posts' => $author->blogs->load(['author', 'category']),
         // 'categories' => Category::all()
     ]);
 });
