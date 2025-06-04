@@ -13,7 +13,8 @@
                         <article class="article">
 
                             <div class="post-img">
-                                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                <img src="https://picsum.photos/1200/800??{{ $post->category->name }}" class="img-fluid"
+                                    alt="">
                             </div>
 
                             <h2 class="title">{{ $post->title }}</h2>
@@ -23,8 +24,8 @@
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                                             href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                            href="blog-details.html"><time datetime="2020-01-01">Jan 1, 2022</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time
+                                            datetime="2020-01-01">{{ $post->created_at->diffForHumans() }}</time></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
                                             href="blog-details.html">12 Comments</a></li>
                                 </ul>
@@ -32,7 +33,7 @@
 
                             <div class="content">
                                 <p>
-                                    {{ $post->content }}
+                                    {!! $post->content !!}
                                 </p>
 
 
