@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('categories', [
-            'title' => 'Blog Categories',
-            'categories' => Category::all()
+        return view('login.index', [
+            'title' => 'Login'
         ]);
     }
 
@@ -37,9 +35,9 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
-
+        //
     }
 
     /**

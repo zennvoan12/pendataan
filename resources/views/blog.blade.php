@@ -3,7 +3,8 @@
 @section('container')
     <main class="main">
 
-        <h1 class="fs-1 text-2xl p-5"> All Blog</h1>
+
+        <h1 class="fs-1 text-2xl p-5 text-center"> {{ $title }}</h1>
 
         <!-- Blog Posts Section -->
 
@@ -17,10 +18,10 @@
                             <h5 class="card-title">{{ $posts[0]->title }}</h5>
                             <p class="card-text">{{ $posts[0]->excerpt }}</p>
                             <i class="bi bi-person"></i> <span class="ps-2"><a
-                                    href="/authors/{{ $posts[0]->author->username }}"
+                                    href="/blog?author=/{{ $posts[0]->author->username }}"
                                     class="text-decoration-none text-white">{{ $posts[0]->author->name }}</a>
                             </span>
-                            <p><a href="/categories/{{ $posts[0]->category->name }}"
+                            <p><a href="/blog?category=/{{ $posts[0]->category->name }}"
                                     class="text-decoration-none text-white"> <i class="bi bi-folder2"></i>
                                     <span class="ps-2">{{ $posts[0]->category->name }}</span>
                                 </a></p>
@@ -66,7 +67,7 @@
 
                                 <div class="meta d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <a href="/authors/{{ $post->author->username }}"
+                                        <a href="/blog?author={{ $post->author->username }}"
                                             class="text-decoration-none text-dark">
                                             <i class="bi bi-person"></i> <span class="ps-2">{{ $post->author->name }}
 
@@ -75,7 +76,7 @@
                                     </div>
                                     <span class="px-3 text-black-50">/</span>
                                     <div class="d-flex align-items-center">
-                                        <a href="/categories/{{ $post->category->name }}"
+                                        <a href="/blog?category={{ $post->category->name }}"
                                             class="text-decoration-none text-dark"> <i class="bi bi-folder2"></i>
                                             <span class="ps-2">{{ $post->category->name }}</span>
                                         </a>
@@ -88,10 +89,10 @@
                                 </p>
 
                                 <span class="post-date"><i class="bi bi-clock"></i> <time
-                                            datetime="2020-01-01">{{ $post->created_at->diffForHumans() }}</time></span>
+                                        datetime="2020-01-01">{{ $post->created_at->diffForHumans() }}</time></span>
                                 <hr>
 
-                                <a href="/blog/{{ $post->slug }}" class="readmore stretched-link"><span>Read
+                                <a href="/blog/{{ $post->slug }}" class="readmore "><span>Read
                                         More</span><i class="bi bi-arrow-right"></i></a>
 
                             </div>
@@ -108,13 +109,13 @@
 
 
 
-        {{-- <section id="blog-pagination" class="blog-pagination section">
+        <section id="blog-pagination" class="blog-pagination section">
             <div class="container">
                 <div class="d-flex justify-content-center">
                     {{ $posts->links() }}
                 </div>
             </div>
-        </section> --}}
+        </section>
         <!-- /Blog Pagination Section -->
 
     </main>
