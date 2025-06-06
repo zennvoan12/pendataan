@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Blog;
-use App\Models\User;
-use App\Models\Category;
+
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -27,8 +25,11 @@ Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 
 Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+// Route::get('/login', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
+// Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [LoginController::class, 'create'])->name('register.create');
 
 
 // Route::get('/authors/{author:username}', function (User $author) {

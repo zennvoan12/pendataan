@@ -13,24 +13,7 @@
     <meta name="keywords"
         content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
     <meta name="author" content="CodedThemes">
-
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
-        id="main-font-link">
-    <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css">
-    <!-- [Feather Icons] https://feathericons.com -->
-    <link rel="stylesheet" href="../assets/fonts/feather.css">
-    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome.css">
-    <!-- [Material Icons] https://fonts.google.com/icons -->
-    <link rel="stylesheet" href="../assets/fonts/material.css">
-    <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
-    <link rel="stylesheet" href="../assets/css/style-preset.css">
-
+    @include('layouts.partials.vendor.css')
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -48,13 +31,13 @@
         <div class="auth-wrapper v3">
             <div class="auth-form">
                 <div class="auth-header">
-                    <a href="#"><img src="../assets/images/logo-dark.svg" alt="img"></a>
+                    <a href="#"><img src="{{ asset('assets/img/logo-dark.svg') }}" alt="img"></a>
                 </div>
                 <div class="card my-5">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Login</b></h3>
-                            <a href="#" class="link-primary">Don't have an account?</a>
+                            <a href="/register" class="link-primary">Don't have an account?</a>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Email Address</label>
@@ -82,7 +65,7 @@
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/google.svg" alt="img"> <span
+                                        <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img"> <span
                                             class="d-none d-sm-inline-block"> Google</span>
                                     </button>
                                 </div>
@@ -90,7 +73,7 @@
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/twitter.svg" alt="img"> <span
+                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img"> <span
                                             class="d-none d-sm-inline-block"> Twitter</span>
                                     </button>
                                 </div>
@@ -98,7 +81,7 @@
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/facebook.svg" alt="img"> <span
+                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img"> <span
                                             class="d-none d-sm-inline-block"> Facebook</span>
                                     </button>
                                 </div>
@@ -125,12 +108,7 @@
     </div>
     <!-- [ Main Content ] end -->
     <!-- Required Js -->
-    <script src="../assets/js/plugins/popper.min.js"></script>
-    <script src="../assets/js/plugins/simplebar.min.js"></script>
-    <script src="../assets/js/plugins/bootstrap.min.js"></script>
-    <script src="../assets/js/fonts/custom-font.js"></script>
-    <script src="../assets/js/pcoded.js"></script>
-    <script src="../assets/js/plugins/feather.min.js"></script>
+
 
 
 
@@ -163,7 +141,7 @@
         font_change("Public-Sans");
     </script>
 
-
+    @include('layouts.partials.vendor.js')
 
 </body>
 <!-- [Body] end -->
