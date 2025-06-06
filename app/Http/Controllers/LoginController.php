@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -64,5 +65,38 @@ class LoginController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        // Proses login atau pendaftaran pengguna
+    }
+
+    public function redirectToTwitter()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    public function handleTwitterCallback()
+    {
+        $user = Socialite::driver('twitter')->user();
+        // Proses login atau pendaftaran pengguna
+    }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        // Proses login atau pendaftaran pengguna
     }
 }

@@ -20,14 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Http\Request $request): void
     {
-
-        // if (config('app.environment') === 'local') {
-        //     \Illuminate\Support\Facades\URL::forceScheme('http');
-        // } else {
-        //     \Illuminate\Support\Facades\URL::forceScheme('https');
-        // }
+        if (!app()->environment('local')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
 
         Paginator::useBootstrapFive();
-        Paginator::useBootstrapFour();
     }
 }

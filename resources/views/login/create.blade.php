@@ -15,21 +15,7 @@
     <meta name="author" content="CodedThemes">
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
-        id="main-font-link">
-    <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css">
-    <!-- [Feather Icons] https://feathericons.com -->
-    <link rel="stylesheet" href="../assets/fonts/feather.css">
-    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome.css">
-    <!-- [Material Icons] https://fonts.google.com/icons -->
-    <link rel="stylesheet" href="../assets/fonts/material.css">
-    <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
-    <link rel="stylesheet" href="../assets/css/style-preset.css">
+    @include('layouts.partials.vendor.css')
 
 </head>
 <!-- [Head] end -->
@@ -48,39 +34,41 @@
         <div class="auth-wrapper v3">
             <div class="auth-form">
                 <div class="auth-header">
-                    <a href="#"><img src="../assets/images/logo-dark.svg" alt="img"></a>
+                    <a href="/" class="logo d-flex align-items-center me-auto">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h2 class="sitename">SMA 1 Kadupandak</h2><span>.</span>
+            </a>
+
                 </div>
                 <div class="card my-5">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Sign up</b></h3>
-                            <a href="#" class="link-primary">Already have an account?</a>
+                            <a href="/login" class="link-primary">Already have an account?</a>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">First Name*</label>
-                                    <input type="text" class="form-control" placeholder="First Name">
-                                </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Full Name" name="name"
+                                    id="name">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Last Name">
-                                </div>
-                            </div>
-                        </div>
+
+
                         <div class="form-group mb-3">
-                            <label class="form-label">Company</label>
-                            <input type="text" class="form-control" placeholder="Company">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" placeholder="Username" name="username"
+                                id="username">
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Email Address*</label>
-                            <input type="email" class="form-control" placeholder="Email Address">
+                            <input type="email" class="form-control" placeholder="name@example" name="email"
+                                id="email">
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" name="password"
+                                id="password">
                         </div>
                         <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#"
                                 class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary">
@@ -95,24 +83,24 @@
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/google.svg" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Google</span>
+                                        <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img">
+                                        <span class="d-none d-sm-inline-block"> Google</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/twitter.svg" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Twitter</span>
+                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img">
+                                        <span class="d-none d-sm-inline-block"> Twitter</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/facebook.svg" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Facebook</span>
+                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img">
+                                        <span class="d-none d-sm-inline-block"> Facebook</span>
                                     </button>
                                 </div>
                             </div>

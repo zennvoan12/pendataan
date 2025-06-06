@@ -32,10 +32,9 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [LoginController::class, 'create'])->name('register.create');
 
 
-// Route::get('/authors/{author:username}', function (User $author) {
-//     return view('blog', [
-//         'title' => "Posts by {$author->name}",
-//         'posts' => $author->blogs->load(['author', 'category']),
-//         // 'categories' => Category::all()
-//     ]);
-// });
+Route::get('/login/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+Route::get('/login/twitter', [LoginController::class, 'redirectToTwitter']);
+Route::get('/login/twitter/callback', [LoginController::class, 'handleTwitterCallback']);
+Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook']);
+Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);

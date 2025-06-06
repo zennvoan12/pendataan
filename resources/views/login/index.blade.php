@@ -31,7 +31,11 @@
         <div class="auth-wrapper v3">
             <div class="auth-form">
                 <div class="auth-header">
-                    <a href="#"><img src="{{ asset('assets/img/logo-dark.svg') }}" alt="img"></a>
+                    <a href="/" class="logo d-flex align-items-center me-auto">
+                        <!-- Uncomment the line below if you also wish to use an image logo -->
+                        <!-- <img src="assets/img/logo.png" alt=""> -->
+                        <h2 class="sitename">SMA 1 Kadupandak</h2><span>.</span>
+                    </a>
                 </div>
                 <div class="card my-5">
                     <div class="card-body">
@@ -41,11 +45,13 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address">
+                            <input type="email" class="form-control" placeholder="Email Address" name="email"
+                                id="email">
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" name="password"
+                                id="password">
                         </div>
                         <div class="d-flex mt-1 justify-content-between">
                             <div class="form-check">
@@ -64,25 +70,28 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="d-grid">
+                                    <form action="{{ route('auth.google') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn mt-2 btn-light-primary bg-light text-muted">
+                                            <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img">
+                                            <span class="d-none d-sm-inline-block"> Google</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Google</span>
+                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img">
+                                        <span class="d-none d-sm-inline-block"> Twitter</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
                                     <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Twitter</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img"> <span
-                                            class="d-none d-sm-inline-block"> Facebook</span>
+                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img">
+                                        <span class="d-none d-sm-inline-block"> Facebook</span>
                                     </button>
                                 </div>
                             </div>
