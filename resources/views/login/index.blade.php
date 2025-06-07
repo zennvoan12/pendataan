@@ -80,7 +80,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="login">Email or Username</label>
                                     <input type="text" class="form-control @error('login') is-invalid @enderror"
-                                        id="login" name="email" placeholder="Email or Username"
+                                        id="login" name="login" placeholder="Email or Username"
                                         value="{{ old('email') }}" required autofocus>
                                     @error('login')
                                         <span class="invalid-feedback" role="alert">

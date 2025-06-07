@@ -29,11 +29,17 @@ Route::resource('/categories', CategoryController::class)->parameters(['categori
 // Route::get('/login', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
 // Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate')->middleware('guest');
-Route::get('/register', [LoginController::class, 'create'])->name('register.create');
-Route::post('/register', [LoginController::class, 'store'])->name('register.store');
+// Route::get('/login', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
+// Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+// Route::get('/register', [LoginController::class, 'create'])->name('register.create')->middleware('guest');
+// Route::post('/register', [LoginController::class, 'store'])->name('register.store');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Menyederhanakan rute dengan menggunakan Resource Controller
+Route::resource('login', LoginController::class)->middleware('guest')
+    ->only(['index', 'store', 'authenticate', 'create']);
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

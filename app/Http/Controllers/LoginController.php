@@ -47,32 +47,55 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request)
     {
-        // Validasi hanya 1 field: login (bisa username/email), dan password
+        // Validasi form (login: email/username, password wajib)
         $request->validate([
             'login' => 'required|string',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
-        // Deteksi apakah input email atau username
-        $login_type = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        // Deteksi tipe input (email atau username)
+        $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // Susun kredensial sesuai tipe login
+        // Susun kredensial login
         $credentials = [
-            $login_type => $request->login,
+            $loginType => $request->login,
             'password' => $request->password,
         ];
 
+        // Proses autentikasi
         if (Auth::attempt($credentials, $request->filled('remember'))) {
+            // Regenerate session untuk keamanan (anti session fixation)
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success', 'Welcome back!');
+
+            // Redirect ke dashboard dengan alert sukses
+            $user = Auth::user(); // atau auth()->user()
+
+            return redirect()->intended('/dashboard')
+                ->with('success', 'Welcome back, ' . ($user ? $user->name : 'User') . '!');
         }
 
-        // Jika gagal
+        // Jika gagal login, kembali dengan pesan error pada field login
         return back()->withErrors([
-            'login' => 'The provided credentials do not match our records.'
-        ])->onlyInput('login');
+            'login' => 'The provided credentials do not match our records.',
+        ])->withInput();
     }
 
+
+
+    public function logout(Request $request)
+    {
+        // Log out the user
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+
+        // Regenerate the CSRF token
+        $request->session()->regenerateToken();
+
+        // Redirect to the home page with a success message
+        return redirect('/')->with('success', 'You have been logged out successfully.');
+    }
 
 
 
