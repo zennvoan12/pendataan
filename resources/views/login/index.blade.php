@@ -43,114 +43,105 @@
                             <h3 class="mb-0"><b>Login</b></h3>
                             <a href="/register" class="link-primary">Don't have an account?</a>
                         </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" name="email"
-                                id="email">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="password"
-                                id="password">
-                        </div>
-                        <div class="d-flex mt-1 justify-content-between">
-                            <div class="form-check">
-                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
-                                    checked="">
-                                <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+                        {{-- alert Pop Up --}}
+
+
+                        {{-- ALERT DESIGNER --}}
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+                                style="z-index: 9999; min-width:300px;" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
-                            <h5 class="text-secondary f-w-400">Forgot Password?</h5>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-primary">Login</button>
-                        </div>
-                        <div class="saprator mt-3">
-                            <span>Login with</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <form action="{{ route('auth.google') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                            <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img">
-                                            <span class="d-none d-sm-inline-block"> Google</span>
-                                        </button>
-                                    </form>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+                                style="z-index: 9999; min-width:300px;" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+                                style="z-index: 9999; min-width:300px;" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                {{ $errors->first() }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        <div class="card shadow rounded-4 p-4" style="min-width: 350px;">
+
+                            <form method="POST" action="{{ route('login.authenticate') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label" for="login">Email or Username</label>
+                                    <input type="text" class="form-control @error('login') is-invalid @enderror"
+                                        id="login" name="email" placeholder="Email or Username"
+                                        value="{{ old('email') }}" required autofocus>
+                                    @error('login')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img">
-                                        <span class="d-none d-sm-inline-block"> Twitter</span>
-                                    </button>
+                                <div class="mb-3">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        id="password" name="password" placeholder="Password" required>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img">
-                                        <span class="d-none d-sm-inline-block"> Facebook</span>
-                                    </button>
-                                </div>
-                            </div>
+                                <div class="d-flex mt-1 justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input input-primary" type="checkbox" id="remember"
+                                            name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label text-muted" for="remember">Keep me signed
+                                            in</label>
+
+                                        <div class="d-grid mt-4">
+                                            <button type="submit"
+                                                class="btn btn-primary rounded-2 fw-bold py-2">Login</button>
+                                        </div>
+                            </form>
                         </div>
-                    </div>
-                </div>
-                <div class="auth-footer row">
-                    <!-- <div class=""> -->
-                    <div class="col my-1">
-                        <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
-                    </div>
-                    <div class="col-auto my-1">
-                        <ul class="list-inline footer-link mb-0">
-                            <li class="list-inline-item"><a href="#">Home</a></li>
-                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="#">Contact us</a></li>
-                        </ul>
-                    </div>
-                    <!-- </div> -->
+
+
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- [ Main Content ] end -->
-    <!-- Required Js -->
+    <div class="auth-footer row">
+        <!-- <div class=""> -->
+        <div class="col my-1">
+            <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
+        </div>
+        <div class="col-auto my-1">
+            <ul class="list-inline footer-link mb-0">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                <li class="list-inline-item"><a href="#">Contact us</a></li>
+            </ul>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>
+</div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- Required Js -->
 
 
 
 
-
-
-    <script>
-        layout_change('light');
-    </script>
-
-
-
-
-    <script>
-        change_box_container('false');
-    </script>
-
-
-
-    <script>
-        layout_rtl_change('false');
-    </script>
-
-
-    <script>
-        preset_change("preset-1");
-    </script>
-
-
-    <script>
-        font_change("Public-Sans");
-    </script>
-
-    @include('layouts.partials.vendor.js')
+@include('layouts.partials.vendor.js')
 
 </body>
 <!-- [Body] end -->

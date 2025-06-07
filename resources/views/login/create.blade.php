@@ -35,10 +35,10 @@
             <div class="auth-form">
                 <div class="auth-header">
                     <a href="/" class="logo d-flex align-items-center me-auto">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h2 class="sitename">SMA 1 Kadupandak</h2><span>.</span>
-            </a>
+                        <!-- Uncomment the line below if you also wish to use an image logo -->
+                        <!-- <img src="assets/img/logo.png" alt=""> -->
+                        <h2 class="sitename">SMA 1 Kadupandak</h2><span>.</span>
+                    </a>
 
                 </div>
                 <div class="card my-5">
@@ -48,7 +48,7 @@
                             <a href="/login" class="link-primary">Already have an account?</a>
                         </div>
 
-                            <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                                 <label class="form-label">Full Name</label>
                                 <input type="text" class="form-control" placeholder="Full Name" name="name"
                                     id="name">
@@ -75,55 +75,95 @@
                                 Privacy Policy</a></p>
                         <div class="d-grid mt-3">
                             <button type="button" class="btn btn-primary">Create Account</button>
-                        </div>
-                        <div class="saprator mt-3">
-                            <span>Sign up with</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/google.svg') }}" alt="img">
-                                        <span class="d-none d-sm-inline-block"> Google</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/twitter.svg') }}" alt="img">
-                                        <span class="d-none d-sm-inline-block"> Twitter</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('assets/img/authentication/facebook.svg') }}" alt="img">
-                                        <span class="d-none d-sm-inline-block"> Facebook</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </div> --}}
 
+                        <form method="POST" action="{{ route('register.store') }}">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Full Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" placeholder="Full Name" value="{{ old('name') }}"
+                                    required autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                    id="username" name="username" placeholder="Username" value="{{ old('username') }}"
+                                    required>
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email Address*</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    id="email" name="email" placeholder="name@example.com"
+                                    value="{{ old('email') }}" required>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    id="password" name="password" placeholder="Password" required>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                <input type="password"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    id="password_confirmation" name="password_confirmation"
+                                    placeholder="Confirm Password" required>
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <p class="mt-4 text-sm text-muted">
+                                By signing up, you agree to our <a href="#" class="text-primary">Terms of
+                                    Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                            </p>
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn btn-primary rounded-2 fw-bold py-2">Create
+                                    Account</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="auth-footer row">
-                    <!-- <div class=""> -->
-                    <div class="col my-1">
-                        <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
-                    </div>
-                    <div class="col-auto my-1">
-                        <ul class="list-inline footer-link mb-0">
-                            <li class="list-inline-item"><a href="#">Home</a></li>
-                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="#">Contact us</a></li>
-                        </ul>
-                    </div>
-                    <!-- </div> -->
-                </div>
+
             </div>
         </div>
+        <div class="auth-footer row">
+            <!-- <div class=""> -->
+            <div class="col my-1">
+                <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
+            </div>
+            <div class="col-auto my-1">
+                <ul class="list-inline footer-link mb-0">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Contact us</a></li>
+                </ul>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+    </div>
     </div>
     <!-- [ Main Content ] end -->
     <!-- Required Js -->

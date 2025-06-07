@@ -82,13 +82,15 @@
             window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
         }
     }
-    scrollTop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (scrollTop) {
+        scrollTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 
     window.addEventListener('load', toggleScrollTop);
     document.addEventListener('scroll', toggleScrollTop);
@@ -196,6 +198,19 @@
     window.addEventListener("load", initSwiper);
 
 })();
+
+
+
+// tambah pop up alert
+setTimeout(function () {
+    let alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function (alert) {
+        // bootstrap 5 auto dismiss
+        let alertInstance = bootstrap.Alert.getOrCreateInstance(alert);
+        alertInstance.close();
+    });
+}, 3000);
+
 
 
 // // Script untuk menambahkan class active pada menu yang dipilih
