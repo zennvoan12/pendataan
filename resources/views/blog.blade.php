@@ -68,7 +68,7 @@
                                 <div class="meta d-flex align-items-center">
                                     <div class="d-flex align-items-center">
                                         <a href="/blog?author={{ $post->author->username }}"
-                                            class="text-decoration-none text-dark">
+                                            class="text-decoration-none">
                                             <i class="bi bi-person"></i> <span class="ps-2">{{ $post->author->name }}
 
                                             </span>
@@ -77,7 +77,7 @@
                                     <span class="px-3 text-black-50">/</span>
                                     <div class="d-flex align-items-center">
                                         <a href="/blog?category={{ $post->category->name }}"
-                                            class="text-decoration-none text-dark"> <i class="bi bi-folder2"></i>
+                                            class="text-decoration-none "> <i class="bi bi-folder2"></i>
                                             <span class="ps-2">{{ $post->category->name }}</span>
                                         </a>
                                     </div>

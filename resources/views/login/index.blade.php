@@ -19,6 +19,36 @@
 <!-- [Body] Start -->
 
 <body>
+
+    {{-- alert Pop Up --}}
+
+
+    {{-- ALERT DESIGNER --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+            style="z-index: 9999; min-width:300px;" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+            style="z-index: 9999; min-width:300px;" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
+            style="z-index: 9999; min-width:300px;" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            {{ $errors->first() }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+
+
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
         <div class="loader-track">
@@ -43,44 +73,16 @@
                             <h3 class="mb-0"><b>Login</b></h3>
                             <a href="/register" class="link-primary">Don't have an account?</a>
                         </div>
-                        {{-- alert Pop Up --}}
 
 
-                        {{-- ALERT DESIGNER --}}
-                        @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
-                                style="z-index: 9999; min-width:300px;" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
-                                style="z-index: 9999; min-width:300px;" role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3 shadow rounded-4 px-4 py-3"
-                                style="z-index: 9999; min-width:300px;" role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                {{ $errors->first() }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-
-                        <div class="card shadow rounded-4 p-4" style="min-width: 350px;">
+                        <div class="card shadow rounded-3 p-4" style="min-width: 350px;">
 
                             <form method="POST" action="{{ route('login.authenticate') }}">
                                 @csrf
                                 <div class="mb-3">
-                                    <label class="form-label" for="login">Email or Username</label>
+                                    <label class="form-label pr-3" for="login">Email or Username</label>
                                     <input type="text" class="form-control @error('login') is-invalid @enderror"
-                                        id="login" name="login" placeholder="Email or Username"
+                                        id="login" name="login" placeholder="email@mail.com or Username"
                                         value="{{ old('email') }}" required autofocus>
                                     @error('login')
                                         <span class="invalid-feedback" role="alert">
@@ -105,43 +107,43 @@
                                         <label class="form-check-label text-muted" for="remember">Keep me signed
                                             in</label>
 
-                                        <div class="d-grid mt-4">
+                                        <div class="d-grid mt-4 ">
                                             <button type="submit"
-                                                class="btn btn-primary rounded-2 fw-bold py-2">Login</button>
+                                                class="btn btn-primary rounded-2 fw-bold py-2  justify-content-center content-center-safe">Login</button>
                                         </div>
+
                             </form>
                         </div>
 
 
+                    </div>
                 </div>
+
+            </div>
+        </div>
+        <div class="auth-footer row">
+            <!-- <div class=""> -->
+            <div class="col my-1">
+                <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
+            </div>
+            <div class="col-auto my-1">
+                <ul class="list-inline footer-link mb-0">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Contact us</a></li>
+                </ul>
             </div>
 
         </div>
     </div>
-    <div class="auth-footer row">
-        <!-- <div class=""> -->
-        <div class="col my-1">
-            <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
-        </div>
-        <div class="col-auto my-1">
-            <ul class="list-inline footer-link mb-0">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                <li class="list-inline-item"><a href="#">Contact us</a></li>
-            </ul>
-        </div>
-        <!-- </div> -->
-    </div>
-</div>
-</div>
-</div>
-<!-- [ Main Content ] end -->
-<!-- Required Js -->
+
+    <!-- [ Main Content ] end -->
+    <!-- Required Js -->
 
 
 
 
-@include('layouts.partials.vendor.js')
+    @include('layouts.partials.vendor.js')
 
 </body>
 <!-- [Body] end -->
