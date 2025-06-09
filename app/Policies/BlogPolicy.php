@@ -21,7 +21,7 @@ class BlogPolicy
      */
     public function view(User $user, Blog $blog): bool
     {
-        return false;
+        return $user->id === $blog->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog): bool
     {
-        return false;
+       return $user->id === $blog->user_id;
     }
 
     /**

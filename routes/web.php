@@ -35,6 +35,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::resource('/dashboard/blog', DashboardPostController::class)
-    ->parameters(['blog' => 'post:slug'])
-    ->middleware('auth');
+Route::post('/logout', [DashboardController::class, 'logout'])->name('dashboard.logout');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('dashboard/blog', DashboardPostController::class);
+});

@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+    public function index(Request $request)
+    {
+        return view('dashboard.post.index', [
+            'posts' => Blog::where('user_id', $request->user()->id)->get()
+        ]);
     }
 
     /**
@@ -62,4 +67,7 @@ class DashboardPostController extends Controller
     {
         //
     }
+
+
+
 }

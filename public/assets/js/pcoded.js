@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // feather icon start
   feather.replace();
   // feather icon end
-  
+
   // remove pre-loader start
   setTimeout(function () {
     document.querySelector('.loader-bg').remove();
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new SimpleBar(document.querySelector('.profile-notification-scroll'));
   }
   // header dropdown scrollbar end
-  
+
   // component scrollbar start
   if (!!document.querySelector('.component-list-card .card-body')) {
     new SimpleBar(document.querySelector('.component-list-card .card-body'));
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetElement.tagName == 'IMG') {
           targetElement = targetElement.parentNode.parentNode;
         }
-        
+
         var temp = targetElement.getAttribute('data-value');
         preset_change(temp);
       });
