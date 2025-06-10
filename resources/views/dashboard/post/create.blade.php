@@ -8,7 +8,7 @@
 
 
         <div class="col-lg-8">
-            <form method="POST" action="/dashboard/post" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.post.index') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -84,12 +84,11 @@
 
                 // Only make the fetch request if the title has content
                 if (titleValue.trim() !== "") {
-                    fetch(`/dashboard/blog/checkSlug?title=${titleValue}`)
-
+                    fetch(`{{ route('dashboard.post.checkSlug') }}?title=${titleValue}`)
                         .then(response => {
                             // Check if the response is OK
                             if (!response.ok) {
-                                throw new Error('Network response was not ok');
+                                throw new Error(`HTTP error! status: ${response.status}`);
                             }
                             return response.json();
                         })
@@ -106,7 +105,7 @@
                         .catch(error => {
                             console.error('Error:', error);
                             // Optionally, handle errors (e.g., clear the slug input or show an error message)
-                            slug.value = ''; // Clear the slug field if there’s an error
+                            slug.value = '';
                         });
                 } else {
                     // Optionally clear the slug field if the title is empty

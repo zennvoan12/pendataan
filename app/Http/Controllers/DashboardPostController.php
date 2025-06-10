@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Auth;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
@@ -35,7 +36,24 @@ class DashboardPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        // Add the authenticated user's ID to the validated data
+        $validatedData['user_id'] = Auth::id();
+
+        // Create a new blog post
+        Blog::create($validatedData);
+
+        // Redirect to the index page with a success message
+        return redirect()->route('dashboard.blog.index')->with('success', 'Blog post created successfully.');
+    }
 
     /**
      * Display the specified resource.
