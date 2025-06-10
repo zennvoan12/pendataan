@@ -3,10 +3,18 @@
 @section('container')
     <h1 class="text-center mb-4 ">Posts</h1>
 
-    <div class="d-inline justify-content-between ">
-        <a href="/dashboard/blog/create" class="btn btn-primary">Create New Post</a>
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
-        <div class="container">
+        @endif
+
+
+        <div class="d-lg-flex justify-content-between  ms-5">
+        <div class="col-lg-8">
+            <a href="/dashboard/blog/create" class="btn btn-primary">Create New Post</a>
 
             <table class="table">
                 <thead>
@@ -28,7 +36,7 @@
                                         data-feather="eye"></span></a>
                                 <a href="/dashboard/blog/{{ $post->slug }}/edit" class="badge bg-warning"
                                     title="Edit"><span data-feather="edit"></span></a>
-                                <form action="/dashboard/post/{{ $post->slug }}" method="POST" class="d-inline"
+                                <form action="/dashboard/blog/{{ $post->slug }}" method="POST" class="d-inline"
                                     onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('delete')
@@ -42,4 +50,5 @@
             </table>
 
         </div>
+    </div>
     @endsection

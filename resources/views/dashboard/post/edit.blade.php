@@ -2,18 +2,19 @@
 
 
 @section('container')
-    <h1 class="text-center mb-4">Create New Post</h1>
+    <h1 class="text-center mb-4">Edit Post</h1>
 
     <div class="container">
 
 
         <div class="col-lg-8">
-            <form method="POST" action="{{ route('dashboard.post.index') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.post.update', $post->slug) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                        name="title" value="{{ old('title') }}">
+                        name="title" value="{{ old('title', $post->title) }}">
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -24,7 +25,7 @@
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug"
-                        name="slug" value="{{ old('slug') }}" >
+                        name="slug" value="{{ old('slug', $post->slug) }}">
                     @error('slug')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -38,7 +39,8 @@
                         name="category_id" required>
                         <option value="">Select Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}</option>
                         @endforeach
                     </select>
@@ -62,14 +64,14 @@
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>
-                    <input id="content" type="hidden" name="content" value="{{ old('content') }}">
+                    <input id="content" type="hidden" name="content" value="{{ old('content', $post->content) }}">
                     <trix-editor input="content"></trix-editor>
                     @error('content')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create Post</button>
+                <button type="submit" class="btn btn-primary">Update Post</button>
         </div>
 
 

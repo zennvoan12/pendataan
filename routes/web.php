@@ -28,54 +28,47 @@ Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
 
 // Menyederhanakan rute dengan menggunakan Resource Controller
-Route::resource('login', LoginController::class)->middleware('guest')
-    ->only(['index', 'store', 'authenticate', 'create']);
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::resource('login', LoginController::class)->middleware('guest')
+//     ->only(['index', 'store', 'authenticate', 'create']);
+// Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::middleware(['auth'])->group(function () {
-//     Route::resource('dashboard/blog', DashboardPostController::class);
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//     Route::post('/logout', [DashboardController::class, 'logout'])->name('dashboard.logout');
+//     Route::resource('dashboard/blog', DashboardPostController::class)
+//         ->parameters(['blog' => 'blog:slug'])
+//         ->names([
+//             'index' => 'dashboard.post.index',
+//             'create' => 'dashboard.post.create',
+//             'store' => 'dashboard.post.store',
+//             'show' => 'dashboard.post.show',
+//             'edit' => 'dashboard.post.edit',
+//             'update' => 'dashboard.post.update',
+//             'destroy' => 'dashboard.post.destroy',
+
+//         ]);
+//     Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('dashboard.post.checkSlug');
 // });
 
+// Rute untuk guest (belum login)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+});
 
-// Route::resource('/dashboard/blog', DashboardPostController::class)->parameters(['blog' => 'blog:slug'])
-//     ->middleware('auth');
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug']);
-//     // Your other dashboard routes...
-// });
-
-Route::middleware(['auth'])->group(function () {
+// Rute yang memerlukan autentikasi
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/logout', [DashboardController::class, 'logout'])->name('dashboard.logout');
-    Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('dashboard.post.checkSlug');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Rute resource blog dengan konfigurasi khusus
     Route::resource('dashboard/blog', DashboardPostController::class)
         ->parameters(['blog' => 'blog:slug'])
-        ->names([
-            'index' => 'dashboard.post.index',
-            'create' => 'dashboard.post.create',
-            'store' => 'dashboard.post.store',
-            'show' => 'dashboard.post.show',
-            'edit' => 'dashboard.post.edit',
-            'update' => 'dashboard.post.update',
-            'destroy' => 'dashboard.post.destroy',
+        ->names('dashboard.post')
+        ->except(['show']); // Hapus jika tidak perlu show
 
-        ]);
-    // Dashboard blog routes with proper naming
-    // Route::prefix('dashboard')->name('dashboard.')->group(function () {
-    //     Route::get('/blog', [DashboardPostController::class, 'index'])->name('post.index');
-    //     Route::get('/blog/create', [DashboardPostController::class, 'create'])->name('create');
-    //     Route::post('/blog', [DashboardPostController::class, 'store'])->name('post.store');
-    //     Route::get('/blog/{blog}', [DashboardPostController::class, 'show'])->name('post.show');
-    //     Route::get('/blog/{blog}/edit', [DashboardPostController::class, 'edit'])->name('post.edit');
-    //     Route::put('/blog/{blog}', [DashboardPostController::class, 'update'])->name('post.update');
-    //     Route::delete('/blog/{blog}', [DashboardPostController::class, 'destroy'])->name('post.destroy');
-
-    //     // AJAX route for slug checking
-    //     Route::get('/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('post.checkSlug');
-    // });
+    // Rute tambahan untuk cek slug
+    Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])
+        ->name('dashboard.post.checkSlug');
 });

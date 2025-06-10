@@ -15,3 +15,7 @@
 <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
 <!-- Main JS File -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
+{{-- Trix --}}
+
+
