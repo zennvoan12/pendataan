@@ -26,6 +26,7 @@ class BlogFactory extends Factory
                 ->join(''),
             "category_id" => mt_rand(1, 3),
             "user_id" => mt_rand(1, 5),
+            "published" => random_int(0, 1) === 1,
 
         ];
     }

@@ -56,8 +56,16 @@
                         <article class="position-relative h-100">
 
                             <div class="post-img position-relative overflow-hidden">
-                                <img src="https://picsum.photos/1200/800??{{ $post->category->name }}" class="img-fluid"
-                                    alt="">
+                                @if ($post->image)
+                                    <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid" alt="">
+                                @else
+                                    @if ($post->category)
+                                        <img src="https://picsum.photos/1200/800??{{ $post->category->name }}"
+                                            class="img-fluid" alt="">
+                                    @else
+                                        <img src="https://picsum.photos/1200/800" class="img-fluid" alt="">
+                                    @endif
+                                @endif
 
                             </div>
 
@@ -67,8 +75,7 @@
 
                                 <div class="meta d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <a href="/blog?author={{ $post->author->username }}"
-                                            class="text-decoration-none">
+                                        <a href="/blog?author={{ $post->author->username }}" class="text-decoration-none">
                                             <i class="bi bi-person"></i> <span class="ps-2">{{ $post->author->name }}
 
                                             </span>
@@ -76,8 +83,8 @@
                                     </div>
                                     <span class="px-3 text-black-50">/</span>
                                     <div class="d-flex align-items-center">
-                                        <a href="/blog?category={{ $post->category->name }}"
-                                            class="text-decoration-none "> <i class="bi bi-folder2"></i>
+                                        <a href="/blog?category={{ $post->category->name }}" class="text-decoration-none ">
+                                            <i class="bi bi-folder2"></i>
                                             <span class="ps-2">{{ $post->category->name }}</span>
                                         </a>
                                     </div>

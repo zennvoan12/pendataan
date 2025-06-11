@@ -27,30 +27,6 @@ Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 
 Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
 
-// Menyederhanakan rute dengan menggunakan Resource Controller
-// Route::resource('login', LoginController::class)->middleware('guest')
-//     ->only(['index', 'store', 'authenticate', 'create']);
-// Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//     Route::post('/logout', [DashboardController::class, 'logout'])->name('dashboard.logout');
-//     Route::resource('dashboard/blog', DashboardPostController::class)
-//         ->parameters(['blog' => 'blog:slug'])
-//         ->names([
-//             'index' => 'dashboard.post.index',
-//             'create' => 'dashboard.post.create',
-//             'store' => 'dashboard.post.store',
-//             'show' => 'dashboard.post.show',
-//             'edit' => 'dashboard.post.edit',
-//             'update' => 'dashboard.post.update',
-//             'destroy' => 'dashboard.post.destroy',
-
-//         ]);
-//     Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('dashboard.post.checkSlug');
-// });
-
 // Rute untuk guest (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\User;
+// use Clockwork\Storage\Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,10 +16,12 @@ use Illuminate\Validation\Rule;
 
 class DashboardPostController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     public function index(Request $request)
     {
         return view('dashboard.post.index', [
@@ -23,181 +29,61 @@ class DashboardPostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('dashboard.post.create', [
             'post' => new Blog(),
-            'categories' => \App\Models\Category::all()
+            'categories' => Category::all()
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     // Validate the request data
-    //     $validatedData = $request->validate([
-    //         'title' => 'required|max:255',
-    //         'slug' => 'required|unique:blogs,slug',
-    //         'image' => '|image|file|max:2048', // Optional image validation
-    //         'content' => 'required',
-    //         'category_id' => 'required|exists:categories,id',
-    //     ]);
-
-    //     if ($request->file('image')) {
-    //         // Store the uploaded image and get its path
-    //         $validatedData['image'] = $request->file('image')->store('post-images');
-    //     } else {
-    //         // If no image is uploaded, set it to null
-    //         $validatedData['image'] = null;
-    //     }
-
-    //     // Add the authenticated user's ID to the validated data
-    //     $validatedData['user_id'] = Auth::id();
-    //     $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
-    //     // Create a new blog post
-    //     Blog::create($validatedData);
-
-    //     // Redirect to the index page with a success message
-    //     return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
-    // }
-
-    // public function store(Request $request)
-    // {
-
-    //     // Validate the request data
-    //     $validatedData = $request->validate([
-    //         'title' => 'required|max:255',
-    //         'slug' => 'required|unique:blogs,slug',
-    //         'image' => 'nullable|image|file|max:2048', // Optional image validation
-    //         'content' => 'required',
-    //         'category_id' => 'required|exists:categories,id',
-    //     ]);
-
-    //     // Handle image upload if available, else set to null
-    //     $validatedData['image'] = $request->file('image') ? $request->file('image')->store('post-images') : null;
-
-    //     // Merge additional data into the validated data
-    //     $validatedData = array_merge($validatedData, [
-    //         'user_id' => Auth::id(),
-    //         'excerpt' => Str::limit(strip_tags($request->content), 200),
-    //     ]);
-
-    //     // Create a new blog post
-    //     Blog::create($validatedData);
-
-    //     // Redirect with a success message
-    //     return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
-    // }
-
     public function store(Request $request)
     {
-        // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:blogs,slug',
-            'image' => 'nullable|image|file|max:2048', // Optional image validation
+            'image' => 'nullable|image|file|max:2048',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        // Handle image upload if available, otherwise set to null
-        $validatedData['image'] = $request->hasFile('image')
-            ? $request->file('image')->store('post-images')
-            : null;
+        // Handle image upload
+        $validatedData['image'] = $this->handleImageUpload($request);
 
-        // Add additional attributes (user_id, excerpt) directly to validated data
+        // Add additional attributes
         $validatedData['user_id'] = Auth::id();
         $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
 
-        // Create a new blog post
+        // Create new blog post
         Blog::create($validatedData);
 
-        // Redirect with a success message
-        return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
+        return redirect()->route('dashboard.post.index')
+            ->with('success', 'Blog post created successfully.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Blog $blog)
     {
-        // Check if the blog post belongs to the authenticated user
-        if (Auth::user()->id !== $blog->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        return view('dashboard.post.show', [
-            'post' => $blog
-        ], compact('blog'));
+        $this->authorizeView($blog);
+        return view('dashboard.post.show', compact('blog'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Blog $blog)
     {
-
-        // Check if the blog post belongs to the authenticated user
-        if (Auth::user()->id !== $blog->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
-
+        $this->authorizeView($blog);
         return view('dashboard.post.edit', [
             'post' => $blog,
-            'categories' => \App\Models\Category::all()
+            'categories' => Category::all()
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    // public function update(Request $request, Blog $blog)
-    // {
-    //     // Check if the blog post belongs to the authenticated user
-    //     if (Auth::user()->id !== $blog->user_id) {
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     // Validate the request data
-    //     $rules = [
-    //         'title' => 'required|max:255',
-    //         'content' => 'required',
-    //         'category_id' => 'required|exists:categories,id',
-    //     ];
-
-    //     if ($request->slug !== $blog->slug) {
-    //         $rules['slug'] = 'required|unique:blogs,slug';
-    //     } else {
-    //         $rules['slug'] = 'required';
-    //     }
-
-    //     $validatedData = $request->validate($rules);
-
-    //     // Update the blog post with the validated data
-    //     $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
-    //     Blog::where('id', $blog->id)->update($validatedData);
-    //     $blog->update($validatedData);
-
-    //     // Redirect to the index page with a success message
-    //     return redirect()->route('dashboard.post.index')->with('success', 'Blog post updated successfully.');
-    // }
     public function update(Request $request, Blog $blog)
     {
-        // Authorization - ensure user owns the blog post
-        if (Auth::id() !== $blog->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorizeView($blog);
 
-        // Validate request data
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'image' => 'nullable|image|file|max:2048',
             'category_id' => 'required|exists:categories,id',
             'slug' => [
                 'required',
@@ -205,46 +91,63 @@ class DashboardPostController extends Controller
             ]
         ]);
 
+        // Handle image upload - include oldImage from form
+        $validatedData['image'] = $this->handleImageUpload($request);
+
         // Generate excerpt
         $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
 
         // Update the blog post
         $blog->update($validatedData);
 
-        // Redirect with success message
         return redirect()->route('dashboard.post.index')
             ->with('success', 'Blog post updated successfully.');
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Blog $blog)
     {
-        // Check if the blog post belongs to the authenticated user
-        if (Auth::user()->id !== $blog->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorizeView($blog);
 
-        // Delete the blog post
+
+
         $blog->delete();
 
-        // Redirect to the index page with a success message
-        return redirect()->route('dashboard.post.index')->with('success', 'Blog post deleted successfully.');
+        return redirect()->route('dashboard.post.index')
+            ->with('success', 'Blog post deleted successfully.');
     }
-
-
 
     public function checkSlug(Request $request)
     {
-        // Ensure there's a title
         if (!$request->has('title')) {
             return response()->json(['error' => 'Title is required'], 400);
         }
 
-        // Generate the slug using the title provided in the request
         $slug = SlugService::createSlug(Blog::class, 'slug', $request->title);
-
-        // Return the generated slug as JSON
         return response()->json(['slug' => $slug]);
+    }
+
+    // Private helper methods
+    private function handleImageUpload(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $newImage = $request->file('image')->store('post-images');
+
+            // Delete old image if it exists
+            if ($request->filled('oldImage')) {
+                Storage::delete($request->oldImage);
+            }
+
+            return $newImage;
+        }
+
+        // Return old image if exists, otherwise null
+        return $request->oldImage ?? null;
+    }
+
+    private function authorizeView(Blog $blog)
+    {
+        if (Auth::id() !== $blog->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

@@ -17,6 +17,10 @@ class Blog extends Model
 
     protected $with = ['author', 'category'];
 
+    protected $casts = [
+        'published' => 'boolean',
+        'published_at' => 'datetime',
+    ];
 
     public function scopeFilter($query, array $filters)
     {

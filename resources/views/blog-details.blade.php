@@ -13,6 +13,16 @@
                         <article class="article">
 
                             <div class="post-img">
+                                @if ($post->image)
+                                    <div class="post-img" style="max-height:350px; overflow:hidden;">
+                                        <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid" alt="">
+                                    </div>
+                                @else
+                                    <div class="post-img">
+                                        <img src="https://picsum.photos/1200/800?random={{ $post->category->name }}"
+                                            class="img-fluid" alt="">
+                                    </div>
+                                @endif
                                 <img src="https://picsum.photos/1200/800??{{ $post->category->name }}" class="img-fluid"
                                     alt="">
                             </div>
@@ -23,7 +33,8 @@
                             <div class="meta-top">
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                            href="/blog?author={{ $post->author->username }}">{{ $post->author->name }}</a></li>
+                                            href="/blog?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                                    </li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time
                                             datetime="2020-01-01">{{ $post->created_at->diffForHumans() }}</time></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
