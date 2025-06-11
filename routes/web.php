@@ -62,13 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Rute resource blog dengan konfigurasi khusus
-    Route::resource('dashboard/blog', DashboardPostController::class)
-        ->parameters(['blog' => 'blog:slug'])
-        ->names('dashboard.post')
-        ->except(['show']); // Hapus jika tidak perlu show
-
     // Rute tambahan untuk cek slug
     Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])
         ->name('dashboard.post.checkSlug');
+    // Rute resource blog dengan konfigurasi khusus
+    Route::resource('dashboard/blog', DashboardPostController::class)
+        ->parameters(['blog' => 'blog:slug'])
+        ->names('dashboard.post');
+
 });

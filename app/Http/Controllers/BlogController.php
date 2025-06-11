@@ -28,7 +28,7 @@ class BlogController extends Controller
         return view('blog', [
             'title' => $title,
             // 'posts' => Blog::all()
-            'posts' => Blog::latest()->paginate(7)->withQueryString(),
+            'posts' => Blog::latest()->paginate(10)->withQueryString(),
         ]);
     }
 

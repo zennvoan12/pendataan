@@ -32,7 +32,7 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->category->name }}</td>
                             <td>
-                                <a href="/dashboard/blog/{{ $post->slug }}" class="badge bg-info" title="View"><span
+                                <a href="{{ route('dashboard.post.show', $post->slug) }}" class="badge bg-info" title="View"><span
                                         data-feather="eye"></span></a>
                                 <a href="/dashboard/blog/{{ $post->slug }}/edit" class="badge bg-warning"
                                     title="Edit"><span data-feather="edit"></span></a>

@@ -51,7 +51,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ $title ?? 'Home' }}</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $title ?? 'Post' }}</li>
                             </ul>
                         </div>
                     </div>

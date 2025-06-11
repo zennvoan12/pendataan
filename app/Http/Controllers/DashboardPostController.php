@@ -37,25 +37,90 @@ class DashboardPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     // Validate the request data
+    //     $validatedData = $request->validate([
+    //         'title' => 'required|max:255',
+    //         'slug' => 'required|unique:blogs,slug',
+    //         'image' => '|image|file|max:2048', // Optional image validation
+    //         'content' => 'required',
+    //         'category_id' => 'required|exists:categories,id',
+    //     ]);
+
+    //     if ($request->file('image')) {
+    //         // Store the uploaded image and get its path
+    //         $validatedData['image'] = $request->file('image')->store('post-images');
+    //     } else {
+    //         // If no image is uploaded, set it to null
+    //         $validatedData['image'] = null;
+    //     }
+
+    //     // Add the authenticated user's ID to the validated data
+    //     $validatedData['user_id'] = Auth::id();
+    //     $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
+    //     // Create a new blog post
+    //     Blog::create($validatedData);
+
+    //     // Redirect to the index page with a success message
+    //     return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
+    // }
+
+    // public function store(Request $request)
+    // {
+
+    //     // Validate the request data
+    //     $validatedData = $request->validate([
+    //         'title' => 'required|max:255',
+    //         'slug' => 'required|unique:blogs,slug',
+    //         'image' => 'nullable|image|file|max:2048', // Optional image validation
+    //         'content' => 'required',
+    //         'category_id' => 'required|exists:categories,id',
+    //     ]);
+
+    //     // Handle image upload if available, else set to null
+    //     $validatedData['image'] = $request->file('image') ? $request->file('image')->store('post-images') : null;
+
+    //     // Merge additional data into the validated data
+    //     $validatedData = array_merge($validatedData, [
+    //         'user_id' => Auth::id(),
+    //         'excerpt' => Str::limit(strip_tags($request->content), 200),
+    //     ]);
+
+    //     // Create a new blog post
+    //     Blog::create($validatedData);
+
+    //     // Redirect with a success message
+    //     return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
+    // }
+
     public function store(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:blogs,slug',
+            'image' => 'nullable|image|file|max:2048', // Optional image validation
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        // Add the authenticated user's ID to the validated data
+        // Handle image upload if available, otherwise set to null
+        $validatedData['image'] = $request->hasFile('image')
+            ? $request->file('image')->store('post-images')
+            : null;
+
+        // Add additional attributes (user_id, excerpt) directly to validated data
         $validatedData['user_id'] = Auth::id();
         $validatedData['excerpt'] = Str::limit(strip_tags($request->content), 200);
+
         // Create a new blog post
         Blog::create($validatedData);
 
-        // Redirect to the index page with a success message
+        // Redirect with a success message
         return redirect()->route('dashboard.post.index')->with('success', 'Blog post created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -69,7 +134,7 @@ class DashboardPostController extends Controller
 
         return view('dashboard.post.show', [
             'post' => $blog
-        ]);
+        ], compact('blog'));
     }
 
     /**

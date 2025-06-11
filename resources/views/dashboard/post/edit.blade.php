@@ -51,7 +51,7 @@
                     @enderror
                 </div>
 
-                {{-- <div class="mb-3">
+                <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
                         name="image" accept=".jpg, .jpeg, .png">
@@ -60,7 +60,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div> --}}
+                </div>
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>
