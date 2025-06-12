@@ -26,6 +26,7 @@
                     <th>Name</th>
                     <th>Slug</th>
                     <th>Description</th>
+                    <th>Posts</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -36,11 +37,12 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
                         <td>{{ $category->description ?? '-' }}</td>
+                        <td>{{ $category->posts_count }}</td>
                         <td>
-                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="badge bg-warning">
+                            <a href="{{ route('admin.categories.edit', $category->slug) }}" class="badge bg-warning">
                                 <span data-feather="edit"></span>
                             </a>
-                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
+                            <form action="{{ route('admin.categories.destroy', $category->slug) }}" method="POST"
                                 class="d-inline">
                                 @csrf
                                 @method('DELETE')
