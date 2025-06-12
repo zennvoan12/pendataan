@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function categoriesIndex()
     {
         return view('dashboard.admin.categories.index', [
-            'categories' => Category::latest()->paginate(10),
+            'categories' => Category::withCount('posts')->latest()->paginate(10),
             'title' => 'Manage Categories'
         ]);
     }
@@ -90,7 +90,7 @@ class CategoryController extends Controller
     public function categoryDestroy(Category $category)
     {
         // Cek apakah kategori digunakan oleh postingan
-        if ($category->blogs()->exists()) {
+        if ($category->posts()->exists()) {
             return redirect()->route('admin.categories.index')
                 ->with('error', 'Cannot delete category with associated posts');
         }

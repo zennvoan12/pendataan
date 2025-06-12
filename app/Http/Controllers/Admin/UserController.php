@@ -42,7 +42,7 @@ class UserController extends Controller
     public function usersIndex()
     {
         return view('dashboard.admin.users.index', [
-            'users' => User::latest()->paginate(10),
+            'users' => User::withCount('blogs')->latest()->paginate(10),
             'title' => 'Manage Users'
         ]);
     }

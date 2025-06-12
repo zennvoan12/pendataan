@@ -25,6 +25,7 @@
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Posts</th>
                     <th>Role</th>
                     <th>Actions</th>
                 </tr>
@@ -36,6 +37,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->blogs_count }}</td>
                         <td>
                             @if ($user->isAdmin)
                                 <span class="badge bg-success">Admin</span>
