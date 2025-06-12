@@ -18,6 +18,27 @@ class UserController extends Controller
         $this->middleware('admin');
     }
 
+    // Resource methods expected by Route::resource
+    public function index()
+    {
+        return $this->usersIndex();
+    }
+
+    public function edit(User $user)
+    {
+        return $this->userEdit($user);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        return $this->userUpdate($request, $user);
+    }
+
+    public function destroy(User $user)
+    {
+        return $this->userDestroy($user);
+    }
+
     public function usersIndex()
     {
         return view('dashboard.admin.users.index', [
