@@ -8,6 +8,36 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller; // Ensure correct Controller is imported
 class CategoryController extends Controller
 {
+    // Resource methods expected by Route::resource
+    public function index()
+    {
+        return $this->categoriesIndex();
+    }
+
+    public function create()
+    {
+        return $this->categoryCreate();
+    }
+
+    public function store(Request $request)
+    {
+        return $this->categoryStore($request);
+    }
+
+    public function edit(Category $category)
+    {
+        return $this->categoryEdit($category);
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        return $this->categoryUpdate($request, $category);
+    }
+
+    public function destroy(Category $category)
+    {
+        return $this->categoryDestroy($category);
+    }
     // Manajemen Kategori
     public function categoriesIndex()
     {
