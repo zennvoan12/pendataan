@@ -5,18 +5,14 @@
         <h1 class="h2">Edit User</h1>
     </div>
 
-    <div class="row">
-
-        <div class=" col-lg-8">
-
-            <form method="POST" action="{{ route('admin.users.update', $user->username) }}">
-                @csrf
-                @method('PUT')
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name"
-                        value="{{ old('name', $user->name) }}" required>
-                </div>
+    <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+        @csrf
+        @method('PUT')
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}"
+                required>
+        </div>
 
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
