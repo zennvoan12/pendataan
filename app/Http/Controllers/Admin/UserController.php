@@ -18,6 +18,27 @@ class UserController extends Controller
         $this->middleware('admin');
     }
 
+    // Resource methods expected by Route::resource
+    public function index()
+    {
+        return $this->usersIndex();
+    }
+
+    public function edit(User $user)
+    {
+        return $this->userEdit($user);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        return $this->userUpdate($request, $user);
+    }
+
+    public function destroy(User $user)
+    {
+        return $this->userDestroy($user);
+    }
+
     public function usersIndex()
     {
         return view('dashboard.admin.users.index', [
@@ -36,8 +57,11 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'is_admin' => 'boolean'
+            'is_admin' => 'boolean',
         ]);
+
+        // Explicitly cast admin checkbox to boolean so unchecked state is saved
+        $validatedData['is_admin'] = $request->boolean('is_admin');
 
         $user->update($validatedData);
 

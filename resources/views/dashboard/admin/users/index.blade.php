@@ -44,10 +44,10 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('admin.users.edit', $user->id) }}" class="badge bg-warning">
+                            <a href="{{ route('admin.users.edit', $user->username) }}" class="badge bg-warning">
                                 <span data-feather="edit"></span>
                             </a>
-                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.users.destroy', $user->username) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"
