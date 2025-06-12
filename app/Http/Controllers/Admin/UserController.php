@@ -57,8 +57,11 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'is_admin' => 'boolean'
+            'is_admin' => 'boolean',
         ]);
+
+        // Explicitly cast admin checkbox to boolean so unchecked state is saved
+        $validatedData['is_admin'] = $request->boolean('is_admin');
 
         $user->update($validatedData);
 
