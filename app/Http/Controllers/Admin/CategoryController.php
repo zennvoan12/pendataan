@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller; // Ensure correct Controller is imported
 class CategoryController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     // Manajemen Kategori
     public function categoriesIndex()
     {
