@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+
+use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Routing\Controller; // Ensure correct Controller is imported
+use Illuminate\Support\Facades\Auth;
+
+class UserController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    public function usersIndex()
+    {
+        return view('dashboard.admin.users.index', [
+            'users' => User::latest()->paginate(10),
+            'title' => 'Manage Users'
+        ]);
+    }
+    public function userEdit(User $user)
+    {
+        return view('dashboard.admin.users.edit', compact('user'));
+    }
+
+    public function userUpdate(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'is_admin' => 'boolean'
+        ]);
+
+        $user->update($validatedData);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User updated successfully');
+    }
+
+    public function userDestroy(User $user)
+    {
+        // Cegah admin menghapus dirinya sendiri
+        if (optional(Auth::user())->id === $user->id) {
+            return redirect()->route('admin.users.index')
+                ->with('error', 'You cannot delete yourself');
+        }
+
+
+        $user->delete();
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deleted successfully');
+    }
+}

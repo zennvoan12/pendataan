@@ -28,16 +28,9 @@
                     @foreach ($posts as $post)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $post->title }}</td>
+                            <td>{{ $category->name }}</td>
                             <td>
-                                @if ($post->category)
-                                    {{ $post->category->name }}
-                                @else
-                                    <span class="text-danger">No Category</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('dashboard.post.show', $post->slug) }}" class="badge bg-info"
+                                <a href="{{ route('dashboard.categories.show', $post->slug) }}" class="badge bg-info"
                                     title="View">
                                     <span data-feather="eye"></span>
                                 </a>

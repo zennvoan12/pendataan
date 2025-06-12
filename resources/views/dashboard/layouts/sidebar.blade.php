@@ -24,6 +24,28 @@
 
             </ul>
 
+            @if (auth()->user()->isAdmin())
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-1 text-muted">
+                    Adminstration
+                </h6>
+
+                <ul class="pc-navbar">
+                    <li class="pc-item">
+                        <a href="{{ route('admin.users.index') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-users"></i></span>
+                            <span class="pc-mtext">Management Users</span>
+                        </a>
+                    </li>
+
+                    <li class="pc-item">
+                        <a href="{{ route('admin.categories.index') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-list"></i></span>
+                            <span class="pc-mtext">Post Category</span>
+                        </a>
+                    </li>
+
+                </ul>
+                @endif
         </div>
     </div>
     </div>
