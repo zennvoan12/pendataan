@@ -44,10 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Profile routes
-    Route::get('/account', [AccountController::class, 'show'])->name('account.show');
-    Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit');
-    Route::put('/account', [AccountController::class, 'update'])->name('account.update');
 
     // Rute untuk cek slug
     Route::get('/dashboard/blog/checkSlug', [DashboardPostController::class, 'checkSlug'])
@@ -56,6 +52,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard/blog', DashboardPostController::class)
         ->parameters(['blog' => 'blog:slug'])
         ->names('dashboard.post');
+
+    // Profile routes
+    Route::get('/account', [AccountController::class, 'show'])->name('account.show');
+    Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit');
+    Route::put('/account', [AccountController::class, 'update'])->name('account.update');
 });
 
 
