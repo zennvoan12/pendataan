@@ -26,7 +26,7 @@ Route::post('/blog/{blog:slug}/comments', [CommentController::class, 'store'])
     ->name('comments.store')->middleware('auth');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 
-Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
+Route::get('/categories', [CategoryController::class, 'index']);
 
 // Rute untuk guest (belum login)
 Route::middleware('guest')->group(function () {

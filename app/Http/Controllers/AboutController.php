@@ -3,20 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        $popularPosts = Blog::where('published', true)
-            ->orderByDesc('views')
-            ->take(3)
-            ->get();
+
 
         return view('about', [
             'title' => 'About Us',
-            'popularPosts' => $popularPosts,
+
         ]);
     }
 }

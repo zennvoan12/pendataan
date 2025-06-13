@@ -23,11 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Http\Request $request): void
     {
-        if (!app()->environment('local')) {
+        if (
+            $request->isSecure() ||
+            $request->header('x-forwarded-proto') === 'https'
+        ) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
-        }
 
-        Paginator::useBootstrapFive();
-        // Middleware should be registered in app/Http/Kernel.php, not here.
+            // Keep APP_URL in sync with the forwarded host when served
+            // through a reverse proxy (e.g., ngrok)
+            config(['app.url' => $request->getSchemeAndHttpHost()]);
+        }
+            Paginator::useBootstrapFive();
+            // Middleware should be registered in app/Http/Kernel.php, not here.
     }
 }

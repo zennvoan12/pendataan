@@ -3,8 +3,6 @@
 
 
 @section('container')
-
-
     <!-- About Section -->
     <section id="about" class="about section">
 
@@ -16,7 +14,7 @@
                 </div>
 
                 <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="inner-title">Consequatur eius et magnam</h2>
+                    <h2 class="inner-title">SMAN 1 Kadupandak</h2>
                     <div class="our-story">
                         <h4>Est 1988</h4>
                         <h3>Our Story</h3>
@@ -32,10 +30,17 @@
                         </ul>
                         <p>Vitae autem velit excepturi fugit. Animi ad non. Eligendi et non nesciunt suscipit repellendus
                             porro in quo eveniet. Molestias in maxime doloremque.</p>
+                        <div class="mt-4">
+                            <h4>Alamat</h4>
+                            <p>Jl. Raya Kadupandak, Kertajadi, Kec. Kadupandak, Kabupaten Cianjur, Jawa Barat 43268</p>
+                            <a href="https://maps.app.goo.gl/9M9rfMbKpYmvzboM6" target="_blank" rel="noopener">
+                                Lihat di Google Maps
+                            </a>
+                        </div>
 
                         <div class="watch-video d-flex align-items-center position-relative">
                             <i class="bi bi-play-circle"></i>
-                            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox stretched-link">Watch
+                            <a href="https://youtu.be/i2zDf6Atb7g?si=D4Pcj-smd3mS9h52" class="glightbox stretched-link">Watch
                                 Video</a>
                         </div>
                     </div>
@@ -47,16 +52,4 @@
 
     </section>
     <!-- /About Section -->
-
-    @if ($popularPosts->count())
-        <!-- Popular Posts Section -->
-        <section id="popular-posts" class="blog section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Popular Posts</h2>
-                </div>
-                @include('partials.posts-grid', ['posts' => $popularPosts])
-            </div>
-        </section>
-    @endif
 @endsection
