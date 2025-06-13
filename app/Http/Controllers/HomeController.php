@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Blog;
 
-class AboutController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
@@ -14,8 +13,8 @@ class AboutController extends Controller
             ->take(3)
             ->get();
 
-        return view('about', [
-            'title' => 'About Us',
+        return view('index', [
+            'title' => 'Home',
             'popularPosts' => $popularPosts,
         ]);
     }

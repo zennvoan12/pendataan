@@ -5,6 +5,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CommentController;
@@ -15,14 +16,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AccountController;
 
-Route::get("/", function () {
-    return view(
-        "index",
-        [
-            "title" => "Home"
-        ]
-    );
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get("/about", [AboutController::class, 'index'])->name('about.index');
 
