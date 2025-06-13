@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\CommentController;
 
 Route::get("/", function () {
     return view(
@@ -25,6 +26,7 @@ Route::get("/about", [AboutController::class, 'index'])->name('about.index');
 
 
 Route::resource('/blog', BlogController::class)->parameters(['blog' => 'blog:slug']);
+Route::post('/blog/{blog:slug}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 
 Route::resource('/categories', CategoryController::class)->parameters(['categories' => 'category:slug']);

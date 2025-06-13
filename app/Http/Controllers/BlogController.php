@@ -34,6 +34,7 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
+        $blog->load(['comments.user']);
 
         return view('blog-details', [
             'title' => $blog['title'],
