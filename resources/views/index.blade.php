@@ -95,5 +95,17 @@
           </div>
 
       </section><!-- /About Section -->
+
+      @if ($popularPosts->count())
+          <!-- Popular Posts Section -->
+          <section id="popular-posts" class="blog section">
+              <div class="container">
+                  <div class="section-header">
+                      <h2>Popular Posts</h2>
+                  </div>
+                  @include('partials.posts-grid', ['posts' => $popularPosts])
+              </div>
+          </section>
+      @endif
   @endsection
 
