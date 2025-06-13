@@ -48,7 +48,9 @@ class AccountController extends Controller
             $validatedData['password'] = bcrypt($validatedData['password']);
         }
 
-        $user->update($validatedData);
+        // Update the authenticated user's details
+        $user->fill($validatedData);
+        $user->save();
 
         return redirect()->route('account.show')->with('success', 'Profile updated successfully');
     }
