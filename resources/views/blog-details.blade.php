@@ -37,8 +37,7 @@
                                     </li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time
                                             datetime="2020-01-01">{{ $post->created_at->diffForHumans() }}</time></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                            href="blog-details.html">12 Comments</a></li>
+
                                 </ul>
                             </div><!-- End meta top -->
 
