@@ -36,7 +36,7 @@
 
                                     <hr>
 
-                                    <a href="/categories/{{ $category->slug }}"
+                                    <a href="/blog?category={{ $category->slug }}"
                                         class="readmore stretched-link"><span></span><i class="bi bi-arrow-right"></i></a>
 
                                 </div>
