@@ -4,6 +4,7 @@
         <li><a href="/about" class="{{ request()->is('about*') ? 'active' : '' }}">About</a></li>
         <li><a href="/blog" class="{{ request()->is('blog*') ? 'active' : '' }}">Blog</a></li>
         <li><a href="/categories" class="{{ request()->is('categories') ? 'active' : '' }}">categories</a></li>
+        <li><a href="/alumni" class="{{ request()->is('alumni*') ? 'active' : '' }}">Alumni</a></li>
         <li>
             <a href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="bi bi-search"></i>

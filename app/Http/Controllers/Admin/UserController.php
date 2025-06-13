@@ -57,6 +57,7 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'bio' => 'nullable|string',
             'is_admin' => 'boolean',
         ]);
 

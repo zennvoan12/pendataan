@@ -10,6 +10,10 @@
         <dd class="col-sm-9">{{ $user->username }}</dd>
         <dt class="col-sm-3">Email</dt>
         <dd class="col-sm-9">{{ $user->email }}</dd>
+        @if($user->bio)
+            <dt class="col-sm-3">Bio</dt>
+            <dd class="col-sm-9">{{ $user->bio }}</dd>
+        @endif
     </dl>
     <a href="{{ route('account.edit') }}" class="btn btn-primary">Edit Profile</a>
 </div>
