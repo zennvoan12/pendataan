@@ -15,10 +15,13 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AlumniController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get("/about", [AboutController::class, 'index'])->name('about.index');
+Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.index');
+Route::get('/alumni/{user:username}', [AlumniController::class, 'show'])->name('alumni.show');
 
 
 Route::resource('/blog', BlogController::class)->parameters(['blog' => 'blog:slug']);
