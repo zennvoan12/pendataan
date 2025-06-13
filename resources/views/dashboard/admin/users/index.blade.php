@@ -39,7 +39,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->blogs_count }}</td>
                         <td>
-                            @if ($user->isAdmin)
+                            @if ($user->isAdmin())
                                 <span class="badge bg-success">Admin</span>
                             @else
                                 <span class="badge bg-secondary">User</span>

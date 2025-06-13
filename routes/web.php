@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 
 Route::get("/", function () {
     return view(
@@ -98,6 +99,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ->only(['index', 'edit', 'update', 'destroy']);
 
     // Manajemen Kategori
-    Route::resource('categories', CategoryController::class)
+    Route::resource('categories', AdminCategory::class)
         ->except(['show']);
 });

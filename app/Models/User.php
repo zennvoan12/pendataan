@@ -15,13 +15,15 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    // ];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'username',
+        'is_admin',
+    ];
 
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -61,8 +63,8 @@ class User extends Authenticatable
     {
         return $this->is_admin;
     }
-    public function getIsAdminAttribute($value)
+    public function getIsAdminAttribute()
     {
-        return (bool) $value;
+        return (bool) $this->attributes['is_admin'];
     }
 }
