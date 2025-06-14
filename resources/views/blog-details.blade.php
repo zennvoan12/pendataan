@@ -154,8 +154,8 @@
                     <div class="search-widget widget-item">
 
                         <h3 class="widget-title">Search</h3>
-                        <form action="">
-                            <input type="text">
+                        <form action="{{ route('blog.search') }}" method="GET">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search...">
                             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                         </form>
 
@@ -166,30 +166,12 @@
 
                         <h3 class="widget-title">Recent Posts</h3>
 
-                        <div class="post-item">
-                            <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                        </div><!-- End recent post item-->
-
-                        <div class="post-item">
-                            <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                        </div><!-- End recent post item-->
-
-                        <div class="post-item">
-                            <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                        </div><!-- End recent post item-->
-
-                        <div class="post-item">
-                            <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                        </div><!-- End recent post item-->
-
-                        <div class="post-item">
-                            <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                        </div><!-- End recent post item-->
+@foreach ($recentPosts as $recent)
+                            <div class="post-item">
+                                <h4><a href="/blog/{{ $recent->slug }}">{{ $recent->title }}</a></h4>
+                                <time datetime="{{ $recent->created_at->toDateString() }}">{{ $recent->created_at->diffForHumans() }}</time>
+                            </div>
+                        @endforeach
 
                     </div><!--/Recent Posts Widget -->
 

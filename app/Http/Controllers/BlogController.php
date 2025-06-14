@@ -27,8 +27,10 @@ class BlogController extends Controller
 
         return view('blog', [
             'title' => $title,
-            // 'posts' => Blog::all()
-            'posts' => Blog::latest()->paginate(10)->withQueryString(),
+            'posts' => Blog::latest()
+                ->filter(request(['search', 'category', 'author']))
+                ->paginate(10)
+                ->withQueryString(),
         ]);
     }
 
@@ -36,9 +38,16 @@ class BlogController extends Controller
     {
         $blog->load(['comments.user']);
 
+        $recentPosts = Blog::where('published', true)
+            ->where('id', '!=', $blog->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         return view('blog-details', [
             'title' => $blog['title'],
-            'post' => $blog
+            'post' => $blog,
+            'recentPosts' => $recentPosts,
         ]);
     }
 
@@ -47,7 +56,10 @@ class BlogController extends Controller
 
         return view('blog', [
             'title' => 'Search Results',
-            'posts' => Blog::latest()->filter(request(['search', 'category', 'author']))->get()
+            'posts' => Blog::latest()
+                ->filter(request(['search', 'category', 'author']))
+                ->paginate(10)
+                ->withQueryString()
         ]);
     }
 }
