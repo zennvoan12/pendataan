@@ -1,7 +1,7 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="/dashboard" class="b-brand text-primary">
+            <a href="/" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
                 <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
             </a>

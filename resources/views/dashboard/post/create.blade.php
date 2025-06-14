@@ -46,32 +46,6 @@
                     @enderror
                 </div>
 
-                <!-- Image Upload Section -->
-                {{-- <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <div class="preview-container mb-4" id="previewContainer">
-                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                        <p class="mb-2">Drag & drop your image here</p>
-                        <p class="text-muted mb-3">OR</p>
-                        <button class="btn btn-primary" id="browseBtn">
-                            <i class="fas fa-folder-open me-2"></i>Browse Files
-                        </button>
-                        <img id="imagePreview" class="preview-image mt-3 col-sm-5" alt="Preview">
-                        <button class="btn btn-danger btn-sm btn-remove" id="removeBtn" style="display: none;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-
-                    <input type="file" id="imageInput" class="d-none" name="image" accept="image/*">
-                    @error('image')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                    <div class="alert alert-info" id="infoAlert">
-                        <i class="fas fa-info-circle me-2"></i>No image selected. Please upload an image to preview.
-                    </div>
-                </div> --}}
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
 
@@ -132,7 +106,7 @@
             </form>
         </div>
     </div>
-    @push('scripts')
+    @stack('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const imageInput = document.getElementById('imageInput');
@@ -306,7 +280,7 @@
                 }
             });
         </script>
-    @endpush
+    @endstack
 
     <style>
         .preview-container:hover {

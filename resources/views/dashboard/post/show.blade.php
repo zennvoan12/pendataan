@@ -15,7 +15,7 @@
                         <article class="article">
                             @if ($post->image)
                                 <div class="post-img" style="max-height:350px; overflow:hidden;">
-                                    <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid" alt="">
+                                    <img src="{{ asset("storage/{$post->image}") }}" class="img-fluid" alt="">
                                 </div>
                             @else
                                 <div class="post-img">
@@ -26,7 +26,7 @@
 
 
                             <h2 class="title">{{ $post->title }}</h2>
-                            </h2>
+
 
                             <div class="meta-top">
                                 <ul>

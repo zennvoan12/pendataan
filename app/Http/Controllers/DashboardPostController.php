@@ -64,7 +64,9 @@ class DashboardPostController extends Controller
     public function show(Blog $blog)
     {
         $this->authorizeView($blog);
-        return view('dashboard.post.show', compact('blog'));
+        return view('dashboard.post.show', [
+            'post' => $blog
+        ]);
     }
 
     public function edit(Blog $blog)
