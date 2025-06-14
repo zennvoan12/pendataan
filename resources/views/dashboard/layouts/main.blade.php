@@ -15,7 +15,7 @@
     <meta name="author" content="CodedThemes">
 
     <!-- [Favicon] icon -->
-    @include('layouts.partials.vendor.css')
+    @include('dashboard.layouts.partials.css')
 
 </head>
 <!-- [Head] end -->
@@ -71,14 +71,7 @@
         {{-- <script src="../assets/js/plugins/apexcharts.min.js"></script> --}}
         {{-- <script src="../assets/js/pages/dashboard-default.js"></script> --}}
         <!-- [Page Specific JS] end -->
-        <!-- Required Js -->
-        <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
-        <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
-        {{-- <script src="{{ asset('assets/js/pcoded.js') }}"></script> --}}
-        <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-        <script src="{{ asset('assets/js/trix.js') }}"></script>
+        @include('dashboard.layouts.partials.js')
 
 
 
@@ -110,7 +103,7 @@
             font_change("Public-Sans");
         </script> --}}
 
-        @include('layouts.partials.vendor.js')
+
 
 </body>
 <!-- [Body] end -->
