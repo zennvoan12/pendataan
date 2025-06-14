@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller; // import Laravel controller
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
@@ -41,6 +42,7 @@ class AccountController extends Controller
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'bio' => 'nullable|string',
+            'photo' => 'nullable|image|file|max:2048',
             'password' => ['nullable', 'min:5'],
         ]);
 
@@ -48,6 +50,16 @@ class AccountController extends Controller
             unset($validatedData['password']);
         } else {
             $validatedData['password'] = bcrypt($validatedData['password']);
+        }
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            $validatedData['photo'] = $request->file('photo')->store('profile-photos');
+            if ($user->photo) {
+                Storage::delete($user->photo);
+            }
+        } else {
+            $validatedData['photo'] = $user->photo;
         }
 
         $user->update($validatedData);

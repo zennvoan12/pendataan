@@ -3,6 +3,9 @@
 @section('container')
 <div class="container">
     <h1 class="mb-4">My Profile</h1>
+    @if($user->photo)
+        <img src="{{ asset('storage/' . $user->photo) }}" alt="Profile Photo" class="img-thumbnail mb-3" width="150">
+    @endif
     <dl class="row">
         <dt class="col-sm-3">Name</dt>
         <dd class="col-sm-9">{{ $user->name }}</dd>

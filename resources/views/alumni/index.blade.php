@@ -9,6 +9,9 @@
                 <div class="col-md-4 mb-3">
                     <div class="card h-100">
                         <div class="card-body">
+                            @if($user->photo)
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="Profile Photo" class="img-thumbnail mb-2" width="100">
+                            @endif
                             <h5 class="card-title">
                                 <a href="{{ route('alumni.show', $user->username) }}" class="text-decoration-none">
                                     {{ $user->name }}
