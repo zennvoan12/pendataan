@@ -3,7 +3,7 @@
 @section('container')
 <div class="container">
     <h1 class="mb-4">Edit Profile</h1>
-    <form method="POST" action="{{ route('account.update') }}">
+    <form method="POST" action="{{ route('account.update') }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -31,6 +31,16 @@
             <label for="bio" class="form-label">Bio</label>
             <textarea class="form-control @error('bio') is-invalid @enderror" id="bio" name="bio" rows="3">{{ old('bio', $user->bio) }}</textarea>
             @error('bio')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            @if($user->photo)
+                <img src="{{ asset('storage/' . $user->photo) }}" alt="Current Photo" class="img-thumbnail d-block mb-2" width="150">
+            @endif
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" accept="image/*">
+            @error('photo')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
