@@ -35,6 +35,24 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="occupation" class="form-label">Occupation</label>
+            <input type="text" class="form-control @error('occupation') is-invalid @enderror" id="occupation" name="occupation" value="{{ old('occupation', $user->occupation) }}">
+            @error('occupation')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="education_level" class="form-label">Education Level</label>
+            <input type="text" class="form-control @error('education_level') is-invalid @enderror" id="education_level" name="education_level" value="{{ old('education_level', $user->education_level) }}">
+            @error('education_level')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="is_active" name="is_active" value="1" {{ old('is_active', $user->is_active) ? 'checked' : '' }}>
+            <label class="form-check-label" for="is_active">Active Alumni</label>
+        </div>
+        <div class="mb-3">
             <label for="photo" class="form-label">Photo</label>
             @if($user->photo)
                 <img src="{{ asset('storage/' . $user->photo) }}" alt="Current Photo" class="img-thumbnail d-block mb-2" width="150">

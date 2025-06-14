@@ -24,6 +24,9 @@ class User extends Authenticatable
         'bio',
         'photo',
         'is_admin',
+        'occupation',
+        'education_level',
+        'is_active',
     ];
 
     // protected $guarded = ['id'];
@@ -48,6 +51,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 
