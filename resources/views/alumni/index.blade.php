@@ -17,6 +17,13 @@
                                     {{ $user->name }}
                                 </a>
                             </h5>
+                            @if($user->occupation)
+                                <p class="mb-1"><strong>Occupation:</strong> {{ $user->occupation }}</p>
+                            @endif
+                            @if($user->education_level)
+                                <p class="mb-1"><strong>Education:</strong> {{ $user->education_level }}</p>
+                            @endif
+                            <p class="mb-1"><strong>Status:</strong> {{ $user->is_active ? 'Active' : 'Inactive' }}</p>
                             @if($user->bio)
                                 <p class="card-text">{{ Str::limit($user->bio, 80) }}</p>
                             @endif

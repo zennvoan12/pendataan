@@ -42,9 +42,13 @@ class AccountController extends Controller
             'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'bio' => 'nullable|string',
+            'occupation' => 'nullable|string|max:255',
+            'education_level' => 'nullable|string|max:255',
             'photo' => 'nullable|image|file|max:2048',
             'password' => ['nullable', 'min:5'],
         ]);
+
+        $validatedData['is_active'] = $request->has('is_active');
 
         if (empty($validatedData['password'])) {
             unset($validatedData['password']);

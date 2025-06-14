@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'zennovan@gmail.com',
             'password' => bcrypt('admin123'),
             'is_admin' => true,
+            'occupation' => 'Administrator',
+            'education_level' => 'Bachelor',
+            'is_active' => true,
         ]);
 
 
