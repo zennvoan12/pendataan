@@ -14,9 +14,8 @@ class CategoryController extends Controller
     {
         return view('categories', [
             'title' => 'Blog Categories',
-            'categories' => Category::all()
+            'categories' => Category::withCount('posts')->get()
+
         ]);
     }
-
-
 }

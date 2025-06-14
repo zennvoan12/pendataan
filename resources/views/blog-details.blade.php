@@ -15,7 +15,8 @@
                             <div class="post-img">
                                 @if ($post->image)
                                     <div class="post-img" style="max-height:350px; overflow:hidden;">
-                                        <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid" style="max-block-size:80%;" alt="">
+                                        <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid"
+                                            style="max-block-size:80%;" alt="">
                                     </div>
                                 @else
                                     <div class="post-img">
@@ -86,11 +87,13 @@
                             <div id="comment-{{ $comment->id }}" class="comment mb-3">
                                 <div class="d-flex">
                                     <div class="comment-img me-2">
-                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($comment->user->name) }}" alt="">
+                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($comment->user->name) }}"
+                                            alt="">
                                     </div>
                                     <div>
                                         <h5>{{ $comment->user->name }}</h5>
-                                        <time datetime="{{ $comment->created_at->toDateString() }}">{{ $comment->created_at->diffForHumans() }}</time>
+                                        <time
+                                            datetime="{{ $comment->created_at->toDateString() }}">{{ $comment->created_at->diffForHumans() }}</time>
                                         <p>{{ $comment->content }}</p>
                                     </div>
                                 </div>
@@ -131,8 +134,7 @@
                     <div class="blog-author-widget widget-item">
 
                         <div class="d-flex flex-column align-items-center">
-                            <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0"
-                                alt="">
+                            <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
                             <h4>Jane Smith</h4>
                             <div class="social-links">
                                 <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
@@ -166,10 +168,11 @@
 
                         <h3 class="widget-title">Recent Posts</h3>
 
-@foreach ($recentPosts as $recent)
+                        @foreach ($recentPosts as $recent)
                             <div class="post-item">
                                 <h4><a href="/blog/{{ $recent->slug }}">{{ $recent->title }}</a></h4>
-                                <time datetime="{{ $recent->created_at->toDateString() }}">{{ $recent->created_at->diffForHumans() }}</time>
+                                <time
+                                    datetime="{{ $recent->created_at->toDateString() }}">{{ $recent->created_at->diffForHumans() }}</time>
                             </div>
                         @endforeach
 
@@ -180,12 +183,12 @@
 
                         <h3 class="widget-title">Categories</h3>
                         <ul class="categories-list">
-                            <li><a href="#">Business</a> <span>(25)</span></li>
-                            <li><a href="#">Creative</a> <span>(12)</span></li>
-                            <li><a href="#">Marketing</a> <span>(5)</span></li>
-                            <li><a href="#">Tips</a> <span>(8)</span></li>
-                            <li><a href="#">Design</a> <span>(15)</span></li>
-                            <li><a href="#">Development</a> <span>(10)</span></li>
+                             @foreach ($categories as $category)
+                                <li>
+                                    <a href="/blog?category={{ $category->slug }}">{{ $category->name }}</a>
+                                    <span>({{ $category->posts_count }})</span>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 

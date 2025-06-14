@@ -44,10 +44,14 @@ class BlogController extends Controller
             ->take(5)
             ->get();
 
+        $categories = Category::withCount('posts')->orderBy('name')->get();
+
         return view('blog-details', [
             'title' => $blog['title'],
             'post' => $blog,
             'recentPosts' => $recentPosts,
+            'categories' => $categories,
+
         ]);
     }
 
