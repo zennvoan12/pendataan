@@ -3,7 +3,7 @@
         <div class="m-header">
             <a href="/" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
-                <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
+                <img src="{{ asset('assets/img/logo-smandak.svg') }}" class="img-fluid logo-lg" alt="logo">
             </a>
         </div>
         <div class="navbar-content">
