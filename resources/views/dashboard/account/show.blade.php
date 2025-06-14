@@ -17,6 +17,16 @@
             <dt class="col-sm-3">Bio</dt>
             <dd class="col-sm-9">{{ $user->bio }}</dd>
         @endif
+        @if($user->occupation)
+            <dt class="col-sm-3">Occupation</dt>
+            <dd class="col-sm-9">{{ $user->occupation }}</dd>
+        @endif
+        @if($user->education_level)
+            <dt class="col-sm-3">Education Level</dt>
+            <dd class="col-sm-9">{{ $user->education_level }}</dd>
+        @endif
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">{{ $user->is_active ? 'Active' : 'Inactive' }}</dd>
     </dl>
     <a href="{{ route('account.edit') }}" class="btn btn-primary">Edit Profile</a>
 </div>

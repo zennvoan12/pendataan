@@ -32,6 +32,9 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'is_admin' => false,
             'bio' => fake()->paragraph(),
+            'occupation' => fake()->jobTitle(),
+            'education_level' => fake()->randomElement(['High School', 'Diploma', 'Bachelor', 'Master', 'Doctorate']),
+            'is_active' => fake()->boolean(80),
         ];
     }
 
