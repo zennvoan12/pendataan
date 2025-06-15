@@ -13,7 +13,7 @@ class BlogController extends Controller
     public function index()
     {
 
-        $title = '';
+        $title = 'Blog';
         if (request('category')) {
             $category = Category::firstWhere('slug', request('category'));
             $title = " Posted in {$category->name}";

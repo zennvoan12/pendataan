@@ -37,7 +37,7 @@
             <a href="{{ route('login') }}" class="nav-link">Login</a>
         </li>
     @endauth
-</ul>
+
 
 
 </ul>
