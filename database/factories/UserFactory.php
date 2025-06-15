@@ -35,6 +35,10 @@ class UserFactory extends Factory
             'occupation' => fake()->jobTitle(),
             'education_level' => fake()->randomElement(['High School', 'Diploma', 'Bachelor', 'Master', 'Doctorate']),
             'is_active' => fake()->boolean(80),
+            'twitter' => fake()->optional()->url(),
+            'facebook' => fake()->optional()->url(),
+            'instagram' => fake()->optional()->url(),
+            'linkedin' => fake()->optional()->url(),
         ];
     }
 

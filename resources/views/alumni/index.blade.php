@@ -24,6 +24,20 @@
                                 <p class="mb-1"><strong>Education:</strong> {{ $user->education_level }}</p>
                             @endif
                             <p class="mb-1"><strong>Status:</strong> {{ $user->is_active ? 'Active' : 'Inactive' }}</p>
+                            <div class="mb-1">
+                                @if($user->twitter)
+                                    <a href="{{ $user->twitter }}" target="_blank" class="me-1"><i class="bi bi-twitter-x"></i></a>
+                                @endif
+                                @if($user->facebook)
+                                    <a href="{{ $user->facebook }}" target="_blank" class="me-1"><i class="bi bi-facebook"></i></a>
+                                @endif
+                                @if($user->instagram)
+                                    <a href="{{ $user->instagram }}" target="_blank" class="me-1"><i class="bi bi-instagram"></i></a>
+                                @endif
+                                @if($user->linkedin)
+                                    <a href="{{ $user->linkedin }}" target="_blank" class="me-1"><i class="bi bi-linkedin"></i></a>
+                                @endif
+                            </div>
                             @if($user->bio)
                                 <p class="card-text">{{ Str::limit($user->bio, 80) }}</p>
                             @endif

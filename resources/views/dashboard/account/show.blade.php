@@ -25,6 +25,22 @@
             <dt class="col-sm-3">Education Level</dt>
             <dd class="col-sm-9">{{ $user->education_level }}</dd>
         @endif
+        @if($user->twitter)
+            <dt class="col-sm-3">Twitter</dt>
+            <dd class="col-sm-9"><a href="{{ $user->twitter }}" target="_blank">{{ $user->twitter }}</a></dd>
+        @endif
+        @if($user->facebook)
+            <dt class="col-sm-3">Facebook</dt>
+            <dd class="col-sm-9"><a href="{{ $user->facebook }}" target="_blank">{{ $user->facebook }}</a></dd>
+        @endif
+        @if($user->instagram)
+            <dt class="col-sm-3">Instagram</dt>
+            <dd class="col-sm-9"><a href="{{ $user->instagram }}" target="_blank">{{ $user->instagram }}</a></dd>
+        @endif
+        @if($user->linkedin)
+            <dt class="col-sm-3">LinkedIn</dt>
+            <dd class="col-sm-9"><a href="{{ $user->linkedin }}" target="_blank">{{ $user->linkedin }}</a></dd>
+        @endif
         <dt class="col-sm-3">Status</dt>
         <dd class="col-sm-9">{{ $user->is_active ? 'Active' : 'Inactive' }}</dd>
     </dl>

@@ -44,6 +44,10 @@ class AccountController extends Controller
             'bio' => 'nullable|string',
             'occupation' => 'nullable|string|max:255',
             'education_level' => 'nullable|string|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
             'photo' => 'nullable|image|file|max:2048',
             'password' => ['nullable', 'min:5'],
         ]);
