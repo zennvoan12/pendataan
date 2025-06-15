@@ -27,6 +27,10 @@ class User extends Authenticatable
         'occupation',
         'education_level',
         'is_active',
+        'twitter',
+        'facebook',
+        'instagram',
+        'linkedin',
     ];
 
     // protected $guarded = ['id'];

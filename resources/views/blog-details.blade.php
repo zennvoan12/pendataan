@@ -132,23 +132,30 @@
 
                     <!-- Blog Author Widget -->
                     <div class="blog-author-widget widget-item">
-
-                        <div class="d-flex flex-column align-items-center">
-                            <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-                            <h4>Jane Smith</h4>
+                        <div class="d-flex flex-column align-items-center text-center">
+                            @if ($post->author->photo)
+                                <img src="{{ asset('storage/' . $post->author->photo) }}" class="rounded-circle flex-shrink-0 mb-2" width="100" alt="{{ $post->author->name }}">
+                            @else
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name) }}" class="rounded-circle flex-shrink-0 mb-2" width="100" alt="{{ $post->author->name }}">
+                            @endif
+                            <h4><a href="{{ route('alumni.show', $post->author->username) }}" class="text-decoration-none">{{ $post->author->name }}</a></h4>
                             <div class="social-links">
-                                <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
-                                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                                <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
+                                @if($post->author->twitter)
+                                    <a href="{{ $post->author->twitter }}" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                                @endif
+                                @if($post->author->facebook)
+                                    <a href="{{ $post->author->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                                @endif
+                                @if($post->author->instagram)
+                                    <a href="{{ $post->author->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                                @endif
+                                @if($post->author->linkedin)
+                                    <a href="{{ $post->author->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                @endif
                             </div>
-
-                            <p>
-                                Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas
-                                repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde
-                                voluptas.
-                            </p>
-
+                            @if($post->author->bio)
+                                <p class="mt-2">{{ $post->author->bio }}</p>
+                            @endif
                         </div>
                     </div><!--/Blog Author Widget -->
 
