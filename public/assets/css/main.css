@@ -2627,3 +2627,37 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+
+/* Responsive fixes for blog post pages */
+@media (max-width: 576px) {
+  /* Blog listing cards */
+  .blog-posts .post-content {
+    padding: 20px;
+  }
+
+  .blog-posts .post-title {
+    font-size: 18px;
+  }
+
+  .blog-posts .post-img img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  /* Single blog post */
+  .blog-details .article {
+    padding: 20px;
+  }
+
+  .blog-details .post-img {
+    margin: -20px -20px 15px -20px;
+  }
+
+  .blog-details .title {
+    font-size: 24px;
+  }
+
+  .blog-comments .comment .comment-img img {
+    width: 40px;
+  }
+}
